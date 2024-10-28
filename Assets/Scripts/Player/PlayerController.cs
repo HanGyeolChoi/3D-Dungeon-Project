@@ -7,8 +7,10 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpPower = 80f;
     public float rollSpeed = 8f;
+    public float rollStamina = 40f;
     private Vector2 curMovementInput;
     private bool isRolled = false;
+    private float rollingTime;
 
     [Header("Look")]
     public Transform cameraContainer;
@@ -29,9 +31,18 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (rollingTime == 0)
+        {
+            Move(moveSpeed);
+        }
+        else
+        {
+            rollingTime -= Time.deltaTime;
+            if(rollingTime <= 0) rollingTime = 0;
+        }
         if (IsGrounded())
         {
-            Move();
+            rollingTime = 0;
             isRolled = false;
         }
     }
@@ -53,10 +64,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Move()
+    private void Move(float speed)
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= moveSpeed;
+        dir *= speed;
         dir.y = _rigidbody.velocity.y;
 
         _rigidbody.velocity = dir;
@@ -85,10 +96,9 @@ public class PlayerController : MonoBehaviour
 
         if (context.phase == InputActionPhase.Started && !IsGrounded() && !isRolled)        // 2단 점프시 구르기
         {
-            Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-            dir *= rollSpeed;
-            dir.y = _rigidbody.velocity.y;
-            _rigidbody.velocity = dir;
+            Move(rollSpeed);
+            CharacterManager.Instance.Player.condition.UseStamina(rollStamina);
+            rollingTime = 3;
             isRolled = true;
         }
     }
