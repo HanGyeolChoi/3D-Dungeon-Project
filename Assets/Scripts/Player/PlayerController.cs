@@ -49,7 +49,10 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        Look();
+        if (canLook)
+        {
+            Look();
+        }
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
@@ -122,5 +125,12 @@ public class PlayerController : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void Toggle()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
     }
 }

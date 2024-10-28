@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad506efb6c245c740bda93a64b2b461a, type: 3}
+  m_Name: Bow
+  m_EditorClassIdentifier: 
+  itemName: "\uD65C"
+  description: "\uACF5\uACA9 \uC2DC \uACF5\uACA9\uB825 2, \uC0AC\uAC70\uB9AC 40\uC758
+    \uD654\uC0B4\uC774 \uBC1C\uC0AC\uB429\uB2C8\uB2E4."
+  type: 1
+  icon: {fileID: 21300000, guid: d93312b82352e1a41909c793c958754d, type: 3}
+  gameObject: {fileID: 0}
+  canStack: 0
+  maxStack: 0
+  consumables: []
+  equipPrefab: {fileID: 0}
