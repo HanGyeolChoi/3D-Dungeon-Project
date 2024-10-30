@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public interface IDamagable
@@ -57,5 +58,16 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     public void TakeDamage(float damage)
     {
         health.Add(-damage);
+    }
+
+    public void SpeedUp(float amount)
+    {
+        StartCoroutine(SpeedChange(amount));
+    }
+    private IEnumerator SpeedChange(float amount)
+    {
+        CharacterManager.Instance.Player.controller.SetSpeed(amount);
+        yield return new WaitForSecondsRealtime(5f);
+        CharacterManager.Instance.Player.controller.SetOriginalSpeed();
     }
 }

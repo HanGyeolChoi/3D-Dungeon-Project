@@ -4,13 +4,14 @@ using UnityEngine.UI;
 public class Condition : MonoBehaviour
 {
     public float curValue;
+    public float startValue;
     public float maxValue;
     public float passiveValue;
     public Image ui;
 
     private void Start()
     {
-        curValue = maxValue;
+        curValue = startValue ;
     }
 
     private void Update()

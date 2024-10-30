@@ -32,7 +32,7 @@ public class ItemData : ScriptableObject
     public string description;
     public ItemType type;
     public Sprite icon;
-    public GameObject gameObject;
+    public GameObject dropPrefab;
 
     [Header("Stack")]
     public bool canStack;

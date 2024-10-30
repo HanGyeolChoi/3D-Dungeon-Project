@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
+    public float initialSpeed = 5f;
     public float moveSpeed = 5f;
     public float jumpPower = 80f;
     public float rollSpeed = 8f;
@@ -23,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private LayerMask groundLayerMask;
     private Rigidbody _rigidbody;
+
+    public event Action inventory;
 
     private void Awake()
     {
@@ -47,6 +51,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     private void LateUpdate()
     {
         if (canLook)
@@ -97,7 +105,7 @@ public class PlayerController : MonoBehaviour
             _rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         }
 
-        if (context.phase == InputActionPhase.Started && !IsGrounded() && !isRolled)        // 2단 점프시 구르기
+        if (context.phase == InputActionPhase.Started && !IsGrounded() && !isRolled && curMovementInput != Vector2.zero)        // 2단 점프시 구르기
         {
             Move(rollSpeed);
             CharacterManager.Instance.Player.condition.UseStamina(rollStamina);
@@ -127,10 +135,36 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started)
+        {
+            inventory?.Invoke();
+            Toggle();   
+        }
+    }
+
+    public void OnQuickslotInput(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started)
+        {
+            float value = context.ReadValue<float>();
+            Debug.Log($"Value : {value}");
+        }
+    }
     private void Toggle()
     {
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
+    }
+
+    public void SetSpeed(float speed)
+    {
+        moveSpeed = speed;
+    }
+    public void SetOriginalSpeed()
+    {
+        moveSpeed = initialSpeed;
     }
 }

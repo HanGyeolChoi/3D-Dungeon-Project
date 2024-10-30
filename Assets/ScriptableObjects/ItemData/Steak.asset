@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad506efb6c245c740bda93a64b2b461a, type: 3}
-  m_Name: HPPotion
+  m_Name: Steak
   m_EditorClassIdentifier: 
-  itemName: "\uCCB4\uB825 \uD3EC\uC158"
-  description: "\uC0AC\uC6A9\uD558\uBA74 \uC801\uB2F9\uB7C9\uC758 \uCCB4\uB825\uC744
-    \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+  itemName: "\uC2A4\uD14C\uC774\uD06C"
+  description: "\uC0AC\uC6A9\uD558\uBA74 \uC808\uBC18\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5\uD569\uB2C8\uB2E4."
   type: 0
-  icon: {fileID: 0}
-  gameObject: {fileID: 0}
+  icon: {fileID: 21300000, guid: 68ebb9dbf480d4845a74447c1b3dad68, type: 3}
+  dropPrefab: {fileID: 5078272712581091689, guid: f501791347cd3284188bb4a81d28d511, type: 3}
   canStack: 1
   maxStack: 20
   consumables:
   - type: 0
-    value: 35
+    value: 50
+    lastTime: 0
   equipPrefab: {fileID: 0}
